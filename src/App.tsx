@@ -77,11 +77,19 @@ export interface Education {
 }
 
 export interface Certification {
+  id: string;
   title: string;
   issuer: string;
+  organization: 'Infosys' | 'IBM' | 'Deloitte' | 'Edunet' | 'Incanto';
   status: 'Completed' | 'Ongoing';
-  year: string;
+  issueDate: string;
+  certId?: string;
+  verifyUrl?: string;
+  verifyText?: string;
+  institution?: string;
   description: string;
+  skills: string[];
+  category: 'software' | 'hardware' | 'ai' | 'analytics';
 }
 
 // ==========================================
@@ -247,25 +255,81 @@ const EDUCATION_DATA: Education = {
 
 const CERTIFICATIONS_DATA: Certification[] = [
   {
-    title: "Embedded Systems Training",
-    issuer: "Incanto Dynamics, Bengaluru",
-    status: "Ongoing",
-    year: "2025 – Present",
-    description: "Hands-on training in microcontroller programming, sensor integration, peripheral protocols (I2C, SPI, UART), and real-time hardware execution."
-  },
-  {
-    title: "Data Analysis Fundamentals",
-    issuer: "Code Unnati / Edunet Foundation",
+    id: "deloitte-data-analytics",
+    title: "Data Analytics Job Simulation",
+    issuer: "Deloitte (Issued via Forage)",
+    organization: "Deloitte",
     status: "Completed",
-    year: "2024",
-    description: "Mastery of Python data science libraries (Pandas, NumPy, Matplotlib), exploratory data analysis, and statistical reporting."
+    issueDate: "March 23, 2026",
+    certId: "69638f204b3bff447af55ac3",
+    verifyUrl: "https://www.theforage.com",
+    verifyText: "Enrolment Code: uz3JzLWecagWFpH7D",
+    description: "Completed practical job simulation tasks in data analysis, data storytelling, and forensic technology under Deloitte Human Resources Leadership.",
+    skills: ["Data Analysis", "Forensic Technology", "Business Intelligence", "Analytics Reporting"],
+    category: "analytics"
   },
   {
-    title: "Technical Proficiency Certification",
+    id: "ibm-ai-literacy",
+    title: "AI Literacy Certification",
+    issuer: "IBM SkillsBuild",
+    organization: "IBM",
+    status: "Completed",
+    issueDate: "December 20, 2025",
+    verifyUrl: "https://www.credly.com/go/LUj5eH0R",
+    verifyText: "Verify Credential on Credly",
+    description: "Official IBM SkillsBuild digital credential verifying artificial intelligence literacy, machine learning concepts, ethical AI frameworks, and generative AI fundamentals.",
+    skills: ["AI Literacy", "Machine Learning", "Generative AI", "AI Ethics", "Data Insights"],
+    category: "ai"
+  },
+  {
+    id: "edunet-code-unnati",
+    title: "Code Unnati Foundation Course",
+    issuer: "Edunet Foundation & SAP",
+    organization: "Edunet",
+    status: "Completed",
+    issueDate: "2025 – 2026",
+    certId: "CU26_41081",
+    institution: "Sri Krishna Institute of Technology (SKIT)",
+    description: "Participated in the Foundation Course and successfully completed intensive training on Python, Object-Oriented Programming (OOP), Data Analytics, DBMS, Data Structures & Algorithms (DSA), and Competitive Coding under the Code Unnati SAP CSR initiative.",
+    skills: ["Python", "OOP", "Data Analytics", "DBMS / MySQL", "DSA", "Competitive Coding"],
+    category: "software"
+  },
+  {
+    id: "infosys-digital-electronics",
+    title: "Digital Electronics Course",
     issuer: "Infosys Springboard",
+    organization: "Infosys",
     status: "Completed",
-    year: "2024",
-    description: "Comprehensive software engineering certification covering web development fundamentals, database queries, and algorithmic problem-solving."
+    issueDate: "September 6, 2025",
+    verifyUrl: "https://verify.onwingspan.com",
+    verifyText: "Verify on Wingspan",
+    description: "Course completion in Digital Electronics covering digital logic gates, boolean minimization, combinational logic design, sequential circuits, flip-flops, counters, and registers.",
+    skills: ["Digital Electronics", "Logic Gates", "Sequential Circuits", "Boolean Algebra", "Flip-Flops"],
+    category: "hardware"
+  },
+  {
+    id: "infosys-c-programming",
+    title: "Programming in C",
+    issuer: "Infosys Springboard",
+    organization: "Infosys",
+    status: "Completed",
+    issueDate: "May 21, 2025",
+    verifyUrl: "https://verify.onwingspan.com",
+    verifyText: "Verify on Wingspan",
+    description: "Course completion in C Programming covering structured syntax, control flows, functions, pointer arithmetic, dynamic memory allocation, and algorithmic problem solving.",
+    skills: ["C Language", "Pointers", "Memory Allocation", "Algorithms", "Data Structures"],
+    category: "software"
+  },
+  {
+    id: "incanto-embedded",
+    title: "Embedded Systems & Microcontrollers",
+    issuer: "Incanto Dynamics, Bengaluru",
+    organization: "Incanto",
+    status: "Ongoing",
+    issueDate: "2025 – Present",
+    description: "Hands-on industrial hardware training in microcontroller programming, sensor interfacing, bus communications (I2C, SPI, UART), and real-time execution.",
+    skills: ["Embedded Systems", "Microcontrollers", "I2C / SPI / UART", "Hardware Interfacing"],
+    category: "hardware"
   }
 ];
 
@@ -279,6 +343,8 @@ export default function App() {
   const [selectedProjectCategory, setSelectedProjectCategory] = useState<ProjectCategory>('all');
   const [isPRDModalOpen, setIsPRDModalOpen] = useState<boolean>(false);
   const [isResumeModalOpen, setIsResumeModalOpen] = useState<boolean>(false);
+  const [selectedCert, setSelectedCert] = useState<Certification | null>(null);
+  const [selectedCertCategory, setSelectedCertCategory] = useState<'all' | 'ai' | 'software' | 'hardware' | 'analytics'>('all');
   const [prdTab, setPrdTab] = useState<'overview' | 'roles' | 'pipeline' | 'schema' | 'api'>('overview');
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [contactSubmitted, setContactSubmitted] = useState<boolean>(false);
@@ -571,16 +637,6 @@ export default function App() {
                     </div>
                   </div>
 
-                  {/* Top Right Floating Badge */}
-                  <div className="absolute -top-3 -right-3 bg-slate-900/95 border border-cyan-500/40 p-2.5 rounded-xl shadow-xl backdrop-blur-md flex items-center gap-2">
-                    <div className="p-1.5 rounded-lg bg-cyan-500/20 text-cyan-400">
-                      <Cpu className="w-4 h-4" />
-                    </div>
-                    <div className="text-left pr-1">
-                      <p className="text-[10px] uppercase tracking-wider text-slate-400 font-mono">Specialization</p>
-                      <p className="text-xs font-bold text-slate-200">Embedded + Web</p>
-                    </div>
-                  </div>
 
                 </div>
 
@@ -650,9 +706,6 @@ export default function App() {
                   I am an Electronics and Communication Engineering undergraduate pursuing my degree in Karnataka, India. With a deep curiosity for both software architectures and hardware systems, my technical journey centers around building full-stack web applications, designing embedded logic, and extracting actionable insights from data.
                 </p>
 
-                <p className="text-slate-400 text-sm leading-relaxed">
-                  Whether developing AI-powered legal assistants, building high-throughput financial trade analytics engines, designing educational backlog prediction models, or orchestrating 7-step production pipelines for photo studios, I focus on building reliable, secure, and user-friendly digital tools.
-                </p>
               </div>
 
               {/* Core Philosophy Highlights */}
@@ -1082,37 +1135,137 @@ export default function App() {
 
             {/* Right Column: Certifications */}
             <div className="lg:col-span-6 space-y-6">
-              <h3 className="text-xl font-bold text-slate-100 flex items-center gap-2 pb-3 border-b border-slate-800">
-                <Award className="w-5 h-5 text-indigo-400" />
-                Professional Training & Certifications
-              </h3>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-800">
+                <h3 className="text-xl font-bold text-slate-100 flex items-center gap-2">
+                  <Award className="w-5 h-5 text-indigo-400" />
+                  Verified Certifications ({CERTIFICATIONS_DATA.length})
+                </h3>
+
+                {/* Category Filter Pills */}
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  {[
+                    { id: 'all', label: 'All (6)' },
+                    { id: 'ai', label: 'AI & Data' },
+                    { id: 'software', label: 'Software' },
+                    { id: 'hardware', label: 'Hardware' }
+                  ].map((cat) => (
+                    <button
+                      key={cat.id}
+                      onClick={() => setSelectedCertCategory(cat.id as any)}
+                      className={`px-2.5 py-1 rounded-lg text-xs font-mono transition-all ${
+                        selectedCertCategory === cat.id
+                          ? 'bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20'
+                          : 'bg-slate-900 text-slate-400 hover:text-slate-200 hover:bg-slate-800 border border-slate-800'
+                      }`}
+                    >
+                      {cat.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
 
               <div className="space-y-4">
-                {CERTIFICATIONS_DATA.map((cert, idx) => (
-                  <div
-                    key={idx}
-                    className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/30 transition-all space-y-2"
-                  >
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <h4 className="text-base font-bold text-slate-100">{cert.title}</h4>
-                        <p className="text-xs text-cyan-400 font-mono">{cert.issuer}</p>
-                      </div>
-                      <span
-                        className={`px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold border ${
-                          cert.status === 'Ongoing'
-                            ? 'bg-amber-500/10 text-amber-400 border-amber-500/30'
-                            : 'bg-cyan-500/10 text-cyan-400 border-cyan-500/30'
-                        }`}
+                {CERTIFICATIONS_DATA
+                  .filter(c => selectedCertCategory === 'all' || c.category === selectedCertCategory || (selectedCertCategory === 'ai' && (c.category === 'ai' || c.category === 'analytics')))
+                  .map((cert) => {
+                    const orgColors = {
+                      Deloitte: 'from-emerald-500/10 to-teal-500/5 text-emerald-400 border-emerald-500/30',
+                      IBM: 'from-blue-500/10 to-indigo-500/5 text-blue-400 border-blue-500/30',
+                      Infosys: 'from-cyan-500/10 to-sky-500/5 text-cyan-400 border-cyan-500/30',
+                      Edunet: 'from-amber-500/10 to-yellow-500/5 text-amber-400 border-amber-500/30',
+                      Incanto: 'from-purple-500/10 to-violet-500/5 text-purple-400 border-purple-500/30'
+                    };
+
+                    return (
+                      <div
+                        key={cert.id}
+                        className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-cyan-500/40 transition-all space-y-3 shadow-lg group relative overflow-hidden"
                       >
-                        {cert.status} ({cert.year})
-                      </span>
-                    </div>
-                    <p className="text-xs text-slate-400 leading-relaxed">
-                      {cert.description}
-                    </p>
-                  </div>
-                ))}
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="space-y-1">
+                            <div className="flex items-center gap-2">
+                              <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold border bg-gradient-to-r ${orgColors[cert.organization]}`}>
+                                {cert.organization}
+                              </span>
+                              <span
+                                className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-bold border ${
+                                  cert.status === 'Ongoing'
+                                    ? 'bg-amber-500/10 text-amber-400 border-amber-500/30'
+                                    : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
+                                }`}
+                              >
+                                {cert.status} • {cert.issueDate}
+                              </span>
+                            </div>
+
+                            <h4 className="text-base font-bold text-slate-100 group-hover:text-cyan-300 transition-colors pt-1">
+                              {cert.title}
+                            </h4>
+                            <p className="text-xs text-slate-400 font-mono">
+                              {cert.issuer} {cert.institution ? `• ${cert.institution}` : ''}
+                            </p>
+                          </div>
+
+                          <button
+                            onClick={() => setSelectedCert(cert)}
+                            className="p-2 rounded-xl bg-slate-800 hover:bg-cyan-500 hover:text-slate-950 text-slate-300 transition-all border border-slate-700/80 shrink-0"
+                            title="Inspect Credential Details"
+                          >
+                            <Maximize2 className="w-4 h-4" />
+                          </button>
+                        </div>
+
+                        <p className="text-xs text-slate-300 leading-relaxed">
+                          {cert.description}
+                        </p>
+
+                        {/* Certificate Meta Details */}
+                        {cert.certId && (
+                          <div className="p-2 rounded-lg bg-slate-950/80 border border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+                            <span className="text-cyan-400/90">Cert ID: {cert.certId}</span>
+                            <span className="text-slate-500 text-[10px]">Verified Credential</span>
+                          </div>
+                        )}
+
+                        {/* Skill Chips */}
+                        <div className="flex flex-wrap gap-1.5 pt-1">
+                          {cert.skills.map((skill, idx) => (
+                            <span
+                              key={idx}
+                              className="px-2 py-0.5 rounded-md bg-slate-950 text-slate-300 text-[10px] font-mono border border-slate-800"
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+
+                        {/* Action Buttons */}
+                        <div className="flex items-center justify-between pt-2 border-t border-slate-800/60 text-xs">
+                          <button
+                            onClick={() => setSelectedCert(cert)}
+                            className="text-cyan-400 font-bold hover:underline flex items-center gap-1 text-[11px]"
+                          >
+                            <span>Inspect Certificate</span>
+                            <ChevronRight className="w-3.5 h-3.5" />
+                          </button>
+
+                          {cert.verifyUrl ? (
+                            <a
+                              href={cert.verifyUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-slate-400 hover:text-white flex items-center gap-1 text-[11px] font-mono transition-colors"
+                            >
+                              <span>Verify Link</span>
+                              <ExternalLink className="w-3 h-3 text-cyan-400" />
+                            </a>
+                          ) : (
+                            <span className="text-slate-500 text-[10px] font-mono">Issued to Anvith Kumar</span>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
               </div>
             </div>
 
@@ -1592,6 +1745,138 @@ selection_status ENUM('Unselected','Selected')`}
                 className="max-w-full h-auto rounded-lg shadow-xl border border-slate-800"
               />
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* ================= CERTIFICATE INSPECTOR MODAL ================= */}
+      {selectedCert && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md animate-in fade-in">
+          <div className="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden shadow-2xl relative">
+            
+            {/* Modal Header */}
+            <div className="p-5 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+                  <Award className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="font-extrabold text-slate-100 text-base">{selectedCert.title}</h3>
+                  <p className="text-xs text-cyan-400 font-mono">Issued by {selectedCert.issuer}</p>
+                </div>
+              </div>
+
+              <button
+                onClick={() => setSelectedCert(null)}
+                className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Modal Body: Digital Certificate Layout */}
+            <div className="p-6 overflow-y-auto space-y-6 bg-slate-950">
+              
+              {/* Certificate Canvas Box */}
+              <div className="p-6 rounded-2xl bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-800 space-y-5 text-center relative overflow-hidden shadow-inner">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent"></div>
+
+                <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 block font-bold">
+                  Official Course Completion Certificate
+                </span>
+
+                <div className="space-y-1">
+                  <p className="text-xs text-slate-400">This certificate is awarded to</p>
+                  <h2 className="text-2xl font-black text-slate-100 tracking-tight font-sans text-cyan-300">
+                    ANVITH KUMAR
+                  </h2>
+                  {selectedCert.institution && (
+                    <p className="text-xs text-slate-400 font-mono pt-0.5">from {selectedCert.institution}</p>
+                  )}
+                </div>
+
+                <div className="py-2 border-y border-slate-800/80 space-y-1">
+                  <p className="text-xs text-slate-400">for successfully completing the course</p>
+                  <h4 className="text-lg font-bold text-slate-100">{selectedCert.title}</h4>
+                  <p className="text-xs text-slate-400 font-mono">Issued: {selectedCert.issueDate}</p>
+                </div>
+
+                {/* Verification IDs & Badges */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left pt-1">
+                  <div className="p-3 rounded-xl bg-slate-900 border border-slate-800/90 space-y-1">
+                    <span className="text-[10px] text-slate-400 font-mono uppercase block">Issuing Authority</span>
+                    <span className="text-xs font-bold text-slate-200 block">{selectedCert.issuer}</span>
+                  </div>
+
+                  <div className="p-3 rounded-xl bg-slate-900 border border-slate-800/90 space-y-1">
+                    <span className="text-[10px] text-slate-400 font-mono uppercase block">Credential Status</span>
+                    <span className="text-xs font-bold text-emerald-400 flex items-center gap-1">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                      {selectedCert.status} Verified
+                    </span>
+                  </div>
+
+                  {selectedCert.certId && (
+                    <div className="p-3 rounded-xl bg-slate-900 border border-slate-800/90 space-y-1 sm:col-span-2 font-mono">
+                      <span className="text-[10px] text-slate-400 uppercase block">Certificate ID / Ref</span>
+                      <span className="text-xs font-bold text-cyan-400">{selectedCert.certId}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Skills & Competencies Verified */}
+              <div className="space-y-3">
+                <h4 className="text-xs font-bold text-slate-300 font-mono uppercase tracking-wider flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-cyan-400" />
+                  Verified Skills & Competencies
+                </h4>
+
+                <div className="flex flex-wrap gap-2">
+                  {selectedCert.skills.map((skill, idx) => (
+                    <div
+                      key={idx}
+                      className="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-2 text-xs font-mono text-slate-200"
+                    >
+                      <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
+                      <span>{skill}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Description */}
+              <p className="text-xs text-slate-400 leading-relaxed bg-slate-900/60 p-4 rounded-xl border border-slate-800/60">
+                {selectedCert.description}
+              </p>
+
+            </div>
+
+            {/* Modal Footer */}
+            <div className="p-4 bg-slate-950 border-t border-slate-800 flex items-center justify-between">
+              <span className="text-xs font-mono text-slate-400">Official Certification Record</span>
+
+              <div className="flex items-center gap-3">
+                {selectedCert.verifyUrl && (
+                  <a
+                    href={selectedCert.verifyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold flex items-center gap-2 transition-colors shadow-lg shadow-cyan-500/20"
+                  >
+                    <span>{selectedCert.verifyText || 'Verify Credential'}</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                )}
+                <button
+                  onClick={() => setSelectedCert(null)}
+                  className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition-colors"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+
           </div>
         </div>
       )}
