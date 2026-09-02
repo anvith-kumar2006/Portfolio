@@ -80,7 +80,7 @@ export interface Certification {
   id: string;
   title: string;
   issuer: string;
-  organization: 'Infosys' | 'IBM' | 'Deloitte' | 'Edunet' | 'Incanto';
+  organization: 'Infosys' | 'IBM' | 'Deloitte' | 'Edunet' | 'Incanto' | 'SAP';
   status: 'Completed' | 'Ongoing';
   issueDate: string;
   certId?: string;
@@ -294,8 +294,20 @@ const CERTIFICATIONS_DATA: Certification[] = [
     skills: ["AI Literacy", "Machine Learning", "Generative AI", "AI Ethics", "Data Insights"],
     category: "ai"
   },
-
-
+  {
+    id: "sap-course-certificate",
+    title: "SAP Course Completion Certificate",
+    issuer: "SAP",
+    organization: "SAP",
+    status: "Completed",
+    issueDate: "March 2026",
+    verifyUrl: "/certificate.pdf",
+    verifyText: "Open certificate PDF",
+    description: "Completed the SAP-related coursework and training record, covering enterprise systems concepts and applied business workflow understanding.",
+    skills: ["SAP Fundamentals", "Enterprise Systems", "Business Processes", "Workflow Learning"],
+    category: "software",
+    certFile: "/certificate.pdf"
+  }
 ];
 
 // ==========================================
@@ -1108,7 +1120,7 @@ export default function App() {
 
                 <div className="flex items-center gap-1.5 flex-wrap">
                   {[
-                    { id: 'all', label: 'All (6)' },
+                    { id: 'all', label: 'All (5)' },
                     { id: 'ai', label: 'AI & Data' },
                     { id: 'software', label: 'Software' },
                     { id: 'hardware', label: 'Hardware' }
