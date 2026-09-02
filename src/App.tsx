@@ -1149,7 +1149,8 @@ export default function App() {
                       IBM: 'from-blue-500/10 to-indigo-500/5 text-blue-400 border-blue-500/30',
                       Infosys: 'from-cyan-500/10 to-sky-500/5 text-cyan-400 border-cyan-500/30',
                       Edunet: 'from-amber-500/10 to-yellow-500/5 text-amber-400 border-amber-500/30',
-                      Incanto: 'from-purple-500/10 to-violet-500/5 text-purple-400 border-purple-500/30'
+                      Incanto: 'from-purple-500/10 to-violet-500/5 text-purple-400 border-purple-500/30',
+                      SAP: 'from-orange-500/10 to-amber-500/5 text-orange-400 border-orange-500/30'
                     };
 
                     return (
