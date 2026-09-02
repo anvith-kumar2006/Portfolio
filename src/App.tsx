@@ -325,8 +325,6 @@ export default function App() {
   const [selectedCertCategory, setSelectedCertCategory] = useState<'all' | 'ai' | 'software' | 'hardware' | 'analytics'>('all');
   const [prdTab, setPrdTab] = useState<'overview' | 'roles' | 'pipeline' | 'schema' | 'api'>('overview');
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
-  const [contactSubmitted, setContactSubmitted] = useState<boolean>(false);
-  const [contactForm, setContactForm] = useState({ name: '', email: '', subject: '', message: '' });
 
   // Handle scroll detection for active section highlight
   useEffect(() => {
@@ -350,17 +348,6 @@ export default function App() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const handleContactSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (contactForm.name && contactForm.email && contactForm.message) {
-      setContactSubmitted(true);
-      setTimeout(() => {
-        setContactSubmitted(false);
-        setContactForm({ name: '', email: '', subject: '', message: '' });
-      }, 5000);
-    }
-  };
 
   const filteredProjects = selectedProjectCategory === 'all'
     ? PROJECTS_DATA
@@ -1251,163 +1238,88 @@ export default function App() {
 
       {/* ================= CONTACT SECTION ================= */}
       <section id="contact" className="py-20 bg-slate-900/40 border-t border-slate-800/60 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 relative z-10">
           
           {/* Section Heading */}
-          <div className="text-center max-w-3xl mx-auto space-y-3 mb-16">
+          <div className="text-center max-w-3xl mx-auto space-y-3">
             <span className="text-xs font-mono uppercase tracking-widest text-cyan-400 font-semibold bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/20">
               Get in Touch
             </span>
             <h2 className="text-3xl font-extrabold text-slate-100 tracking-tight sm:text-4xl">
               Connect with Anvith
             </h2>
-            <p className="text-slate-400 text-sm sm:text-base">
-              Interested in software engineering roles, embedded systems projects, or technical collaboration? Drop a message!
+            <p className="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto">
+              Interested in software engineering roles, embedded systems projects, or technical collaboration? Reach out directly via email, GitHub, or LinkedIn!
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-            
-            {/* Left Column: Direct Info Cards */}
-            <div className="lg:col-span-5 space-y-6">
-              
-              <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-6">
-                <h3 className="text-lg font-bold text-slate-100">Contact Details</h3>
+          <div className="bg-slate-900 rounded-3xl border border-slate-800 p-6 sm:p-10 space-y-8 shadow-2xl">
+            <h3 className="text-xl font-extrabold text-slate-100 text-center">Contact Details</h3>
 
-                <div className="space-y-4">
-                  <a
-                    href={`mailto:${PROFILE_DATA.email}`}
-                    className="p-4 rounded-xl bg-slate-950 border border-slate-800 flex items-center gap-4 hover:border-cyan-500/40 transition-all group"
-                  >
-                    <div className="p-3 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 group-hover:scale-110 transition-transform">
-                      <Mail className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <span className="text-[10px] text-slate-400 font-mono block uppercase">Email Address</span>
-                      <span className="text-xs sm:text-sm font-bold text-slate-200 group-hover:text-cyan-400 transition-colors">
-                        {PROFILE_DATA.email}
-                      </span>
-                    </div>
-                  </a>
-
-                  <a
-                    href={PROFILE_DATA.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-4 rounded-xl bg-slate-950 border border-slate-800 flex items-center gap-4 hover:border-indigo-500/40 transition-all group"
-                  >
-                    <div className="p-3 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 group-hover:scale-110 transition-transform">
-                      <Github className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <span className="text-[10px] text-slate-400 font-mono block uppercase">GitHub Profile</span>
-                      <span className="text-xs sm:text-sm font-bold text-slate-200 group-hover:text-indigo-400 transition-colors">
-                        github.com/anvith-kumar2006
-                      </span>
-                    </div>
-                  </a>
-
-                  <a
-                    href={PROFILE_DATA.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-4 rounded-xl bg-slate-950 border border-slate-800 flex items-center gap-4 hover:border-blue-500/40 transition-all group"
-                  >
-                    <div className="p-3 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/20 group-hover:scale-110 transition-transform">
-                      <Linkedin className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <span className="text-[10px] text-slate-400 font-mono block uppercase">LinkedIn Professional Network</span>
-                      <span className="text-xs sm:text-sm font-bold text-slate-200 group-hover:text-blue-400 transition-colors">
-                        linkedin.com/in/anvith-kumar-22470a333
-                      </span>
-                    </div>
-                  </a>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <a
+                href={`mailto:${PROFILE_DATA.email}`}
+                className="p-6 rounded-2xl bg-slate-950 border border-slate-800 flex flex-col items-center text-center gap-4 hover:border-cyan-500/40 transition-all group shadow-md"
+              >
+                <div className="p-4 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 group-hover:scale-110 transition-transform">
+                  <Mail className="w-6 h-6" />
                 </div>
-              </div>
+                <div>
+                  <span className="text-[10px] text-slate-400 font-mono block uppercase mb-1">Email Address</span>
+                  <span className="text-xs sm:text-sm font-bold text-slate-200 group-hover:text-cyan-400 transition-colors break-all">
+                    {PROFILE_DATA.email}
+                  </span>
+                </div>
+              </a>
 
-              {/* Location Card */}
-              <div className="p-5 rounded-2xl bg-slate-900/60 border border-slate-800/80 flex items-center justify-between text-xs font-mono">
-                <span className="text-slate-400">LOCATION</span>
-                <span className="text-slate-200 font-bold">{PROFILE_DATA.location}</span>
-              </div>
+              <a
+                href={PROFILE_DATA.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-6 rounded-2xl bg-slate-950 border border-slate-800 flex flex-col items-center text-center gap-4 hover:border-indigo-500/40 transition-all group shadow-md"
+              >
+                <div className="p-4 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 group-hover:scale-110 transition-transform">
+                  <Github className="w-6 h-6" />
+                </div>
+                <div>
+                  <span className="text-[10px] text-slate-400 font-mono block uppercase mb-1">GitHub Profile</span>
+                  <span className="text-xs sm:text-sm font-bold text-slate-200 group-hover:text-indigo-400 transition-colors">
+                    github.com/anvith-kumar2006
+                  </span>
+                </div>
+              </a>
 
+              <a
+                href={PROFILE_DATA.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-6 rounded-2xl bg-slate-950 border border-slate-800 flex flex-col items-center text-center gap-4 hover:border-blue-500/40 transition-all group shadow-md"
+              >
+                <div className="p-4 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20 group-hover:scale-110 transition-transform">
+                  <Linkedin className="w-6 h-6" />
+                </div>
+                <div>
+                  <span className="text-[10px] text-slate-400 font-mono block uppercase mb-1">LinkedIn Network</span>
+                  <span className="text-xs sm:text-sm font-bold text-slate-200 group-hover:text-blue-400 transition-colors break-all">
+                    linkedin.com/in/anvith-kumar-22470a333
+                  </span>
+                </div>
+              </a>
             </div>
 
-            {/* Right Column: Contact Form */}
-            <div className="lg:col-span-7 bg-slate-900 rounded-2xl border border-slate-800 p-6 sm:p-8">
-              {contactSubmitted ? (
-                <div className="py-12 text-center space-y-4 animate-in fade-in">
-                  <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mx-auto">
-                    <CheckCircle2 className="w-8 h-8" />
-                  </div>
-                  <h3 className="text-xl font-bold text-slate-100">Message Received!</h3>
-                  <p className="text-slate-400 text-sm max-w-md mx-auto">
-                    Thank you for reaching out, Anvith will review your inquiry and get back to you promptly at {contactForm.email || 'your email'}.
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleContactSubmit} className="space-y-4">
-                  <h3 className="text-lg font-bold text-slate-100 mb-2">Send a Message</h3>
-                  
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-mono text-slate-400 mb-1">YOUR NAME</label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="John Doe"
-                        value={contactForm.name}
-                        onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
-                        className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:outline-none focus:border-cyan-500 transition-colors"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-mono text-slate-400 mb-1">YOUR EMAIL</label>
-                      <input
-                        type="email"
-                        required
-                        placeholder="john@example.com"
-                        value={contactForm.email}
-                        onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
-                        className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:outline-none focus:border-cyan-500 transition-colors"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-mono text-slate-400 mb-1">SUBJECT</label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="Software Opportunity / Hardware Inquiry"
-                      value={contactForm.subject}
-                      onChange={(e) => setContactForm({ ...contactForm, subject: e.target.value })}
-                      className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:outline-none focus:border-cyan-500 transition-colors"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-mono text-slate-400 mb-1">MESSAGE</label>
-                    <textarea
-                      rows={4}
-                      required
-                      placeholder="Hello Anvith, I would like to discuss..."
-                      value={contactForm.message}
-                      onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
-                      className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:outline-none focus:border-cyan-500 transition-colors resize-none"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-bold text-sm shadow-lg shadow-cyan-500/20 hover:from-cyan-400 hover:to-blue-500 transition-all flex items-center justify-center gap-2"
-                  >
-                    <Send className="w-4 h-4" />
-                    <span>Send Inquiry</span>
-                  </button>
-                </form>
-              )}
+            {/* Location & Direct Action */}
+            <div className="p-5 rounded-2xl bg-slate-950 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono">
+              <div className="flex items-center gap-2">
+                <span className="text-slate-400 uppercase">LOCATION:</span>
+                <span className="text-slate-200 font-bold">{PROFILE_DATA.location}</span>
+              </div>
+              <a
+                href={`mailto:${PROFILE_DATA.email}`}
+                className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-bold text-xs shadow-lg shadow-cyan-500/20 hover:from-cyan-400 hover:to-blue-500 transition-all flex items-center gap-2"
+              >
+                <Mail className="w-4 h-4" />
+                <span>Send Direct Email</span>
+              </a>
             </div>
 
           </div>
