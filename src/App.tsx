@@ -90,6 +90,8 @@ export interface Certification {
   description: string;
   skills: string[];
   category: 'software' | 'hardware' | 'ai' | 'analytics';
+  certImage?: string;
+  certFile?: string;
 }
 
 // ==========================================
@@ -187,24 +189,7 @@ const PROJECTS_DATA: Project[] = [
     githubUrl: "https://github.com/anvith-kumar2006/Studio-Management-System",
     liveUrl: "https://github.com/anvith-kumar2006/Studio-Management-System"
   },
-  {
-    id: "verilog-digital-design",
-    title: "Verilog HDL & Digital Logic Design Lab",
-    subtitle: "Hardware Description Language & Circuit Diagnostics",
-    category: "hardware",
-    featured: true,
-    description: "Hardware modeling, digital system circuit design, and Verilog HDL implementations for embedded hardware systems.",
-    detailedDescription: "Focusing on low-level circuit behavior, state machines, arithmetic logic units (ALU), memory controllers, and diagnostic hardware troubleshooting as part of core ECE curriculum and lab research.",
-    techStack: ["Verilog HDL", "Digital Logic Design", "Circuit Troubleshooting", "Embedded Systems", "C"],
-    highlights: [
-      "Finite State Machine (FSM) modeling & timing simulation",
-      "Digital circuit synthesis & gate-level schematic optimization",
-      "Microcontroller bus interfacing & hardware debugging",
-      "Hardware-software codesign for real-world signal processing"
-    ],
-    githubUrl: "https://github.com/anvith-kumar2006",
-    liveUrl: "https://github.com/anvith-kumar2006"
-  }
+  
 ];
 
 const SKILLS_DATA: Skill[] = [
@@ -255,6 +240,34 @@ const EDUCATION_DATA: Education = {
 
 const CERTIFICATIONS_DATA: Certification[] = [
   {
+    id: "infosys-c-programming",
+    title: "Programming in C",
+    issuer: "Infosys Springguard",
+    organization: "Infosys",
+    status: "Completed",
+    issueDate: "May 21, 2025",
+    verifyUrl: "https://verify.owningspan.com",
+    verifyText: "Verify via QR Code",
+    description: "Successfully completed the comprehensive course on Programming in C, covering fundamental programming concepts, memory management, and practical coding skills.",
+    skills: ["C Programming", "Data Structures", "Algorithms", "Problem Solving"],
+    category: "software",
+    certImage: "/c-programming.jpeg"
+  },
+  {
+    id: "infosys-digital-electronics",
+    title: "Digital Electronics - Online Digital Electronics Courses",
+    issuer: "Infosys Springguard",
+    organization: "Infosys",
+    status: "Completed",
+    issueDate: "September 6, 2025",
+    verifyUrl: "https://verify.owningspan.com",
+    verifyText: "Verify via QR Code",
+    description: "Successfully completed the comprehensive course on Digital Electronics, covering logic gates, combinational circuits, sequential circuits, and practical hardware design principles.",
+    skills: ["Digital Electronics", "Logic Circuits", "HDL Fundamentals", "Hardware Design"],
+    category: "hardware",
+    certImage: "/digital-electronics.jpeg"
+  },
+  {
     id: "deloitte-data-analytics",
     title: "Data Analytics Job Simulation",
     issuer: "Deloitte (Issued via Forage)",
@@ -281,56 +294,8 @@ const CERTIFICATIONS_DATA: Certification[] = [
     skills: ["AI Literacy", "Machine Learning", "Generative AI", "AI Ethics", "Data Insights"],
     category: "ai"
   },
-  {
-    id: "edunet-code-unnati",
-    title: "Code Unnati Foundation Course",
-    issuer: "Edunet Foundation & SAP",
-    organization: "Edunet",
-    status: "Completed",
-    issueDate: "2025 – 2026",
-    certId: "CU26_41081",
-    institution: "Sri Krishna Institute of Technology (SKIT)",
-    description: "Participated in the Foundation Course and successfully completed intensive training on Python, Object-Oriented Programming (OOP), Data Analytics, DBMS, Data Structures & Algorithms (DSA), and Competitive Coding under the Code Unnati SAP CSR initiative.",
-    skills: ["Python", "OOP", "Data Analytics", "DBMS / MySQL", "DSA", "Competitive Coding"],
-    category: "software"
-  },
-  {
-    id: "infosys-digital-electronics",
-    title: "Digital Electronics Course",
-    issuer: "Infosys Springboard",
-    organization: "Infosys",
-    status: "Completed",
-    issueDate: "September 6, 2025",
-    verifyUrl: "https://verify.onwingspan.com",
-    verifyText: "Verify on Wingspan",
-    description: "Course completion in Digital Electronics covering digital logic gates, boolean minimization, combinational logic design, sequential circuits, flip-flops, counters, and registers.",
-    skills: ["Digital Electronics", "Logic Gates", "Sequential Circuits", "Boolean Algebra", "Flip-Flops"],
-    category: "hardware"
-  },
-  {
-    id: "infosys-c-programming",
-    title: "Programming in C",
-    issuer: "Infosys Springboard",
-    organization: "Infosys",
-    status: "Completed",
-    issueDate: "May 21, 2025",
-    verifyUrl: "https://verify.onwingspan.com",
-    verifyText: "Verify on Wingspan",
-    description: "Course completion in C Programming covering structured syntax, control flows, functions, pointer arithmetic, dynamic memory allocation, and algorithmic problem solving.",
-    skills: ["C Language", "Pointers", "Memory Allocation", "Algorithms", "Data Structures"],
-    category: "software"
-  },
-  {
-    id: "incanto-embedded",
-    title: "Embedded Systems & Microcontrollers",
-    issuer: "Incanto Dynamics, Bengaluru",
-    organization: "Incanto",
-    status: "Ongoing",
-    issueDate: "2025 – Present",
-    description: "Hands-on industrial hardware training in microcontroller programming, sensor interfacing, bus communications (I2C, SPI, UART), and real-time execution.",
-    skills: ["Embedded Systems", "Microcontrollers", "I2C / SPI / UART", "Hardware Interfacing"],
-    category: "hardware"
-  }
+
+
 ];
 
 // ==========================================
@@ -1086,10 +1051,10 @@ export default function App() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          <div className="space-y-8">
             
-            {/* Left Column: Education Timeline */}
-            <div className="lg:col-span-6 space-y-6">
+            {/* Education Block */}
+            <div className="space-y-6">
               <h3 className="text-xl font-bold text-slate-100 flex items-center gap-2 pb-3 border-b border-slate-800">
                 <GraduationCap className="w-5 h-5 text-cyan-400" />
                 Degree & Academic Institution
@@ -1133,15 +1098,14 @@ export default function App() {
               </div>
             </div>
 
-            {/* Right Column: Certifications */}
-            <div className="lg:col-span-6 space-y-6">
+            {/* Certifications block placed below the education section */}
+            <div className="space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-800">
                 <h3 className="text-xl font-bold text-slate-100 flex items-center gap-2">
                   <Award className="w-5 h-5 text-indigo-400" />
                   Verified Certifications ({CERTIFICATIONS_DATA.length})
                 </h3>
 
-                {/* Category Filter Pills */}
                 <div className="flex items-center gap-1.5 flex-wrap">
                   {[
                     { id: 'all', label: 'All (6)' },
@@ -1219,7 +1183,6 @@ export default function App() {
                           {cert.description}
                         </p>
 
-                        {/* Certificate Meta Details */}
                         {cert.certId && (
                           <div className="p-2 rounded-lg bg-slate-950/80 border border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
                             <span className="text-cyan-400/90">Cert ID: {cert.certId}</span>
@@ -1227,7 +1190,6 @@ export default function App() {
                           </div>
                         )}
 
-                        {/* Skill Chips */}
                         <div className="flex flex-wrap gap-1.5 pt-1">
                           {cert.skills.map((skill, idx) => (
                             <span
@@ -1239,7 +1201,6 @@ export default function App() {
                           ))}
                         </div>
 
-                        {/* Action Buttons */}
                         <div className="flex items-center justify-between pt-2 border-t border-slate-800/60 text-xs">
                           <button
                             onClick={() => setSelectedCert(cert)}
@@ -1779,50 +1740,68 @@ selection_status ENUM('Unselected','Selected')`}
               
               {/* Certificate Canvas Box */}
               <div className="p-6 rounded-2xl bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-800 space-y-5 text-center relative overflow-hidden shadow-inner">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent"></div>
+                
+                {/* Show PDF viewer for PDF certificates */}
+                {selectedCert.certFile && selectedCert.certFile.endsWith('.pdf') ? (
+                  <embed
+                    src={selectedCert.certFile}
+                    type="application/pdf"
+                    className="w-full rounded-xl"
+                    style={{ height: '600px' }}
+                  />
+                ) : selectedCert.certImage ? (
+                  <img
+                    src={selectedCert.certImage}
+                    alt={selectedCert.title}
+                    className="w-full h-auto rounded-xl object-contain max-h-[500px]"
+                  />
+                ) : (
+                  <div className="space-y-5">
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent"></div>
 
-                <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 block font-bold">
-                  Official Course Completion Certificate
-                </span>
-
-                <div className="space-y-1">
-                  <p className="text-xs text-slate-400">This certificate is awarded to</p>
-                  <h2 className="text-2xl font-black text-slate-100 tracking-tight font-sans text-cyan-300">
-                    ANVITH KUMAR
-                  </h2>
-                  {selectedCert.institution && (
-                    <p className="text-xs text-slate-400 font-mono pt-0.5">from {selectedCert.institution}</p>
-                  )}
-                </div>
-
-                <div className="py-2 border-y border-slate-800/80 space-y-1">
-                  <p className="text-xs text-slate-400">for successfully completing the course</p>
-                  <h4 className="text-lg font-bold text-slate-100">{selectedCert.title}</h4>
-                  <p className="text-xs text-slate-400 font-mono">Issued: {selectedCert.issueDate}</p>
-                </div>
-
-                {/* Verification IDs & Badges */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left pt-1">
-                  <div className="p-3 rounded-xl bg-slate-900 border border-slate-800/90 space-y-1">
-                    <span className="text-[10px] text-slate-400 font-mono uppercase block">Issuing Authority</span>
-                    <span className="text-xs font-bold text-slate-200 block">{selectedCert.issuer}</span>
-                  </div>
-
-                  <div className="p-3 rounded-xl bg-slate-900 border border-slate-800/90 space-y-1">
-                    <span className="text-[10px] text-slate-400 font-mono uppercase block">Credential Status</span>
-                    <span className="text-xs font-bold text-emerald-400 flex items-center gap-1">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                      {selectedCert.status} Verified
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 block font-bold">
+                      Official Course Completion Certificate
                     </span>
-                  </div>
 
-                  {selectedCert.certId && (
-                    <div className="p-3 rounded-xl bg-slate-900 border border-slate-800/90 space-y-1 sm:col-span-2 font-mono">
-                      <span className="text-[10px] text-slate-400 uppercase block">Certificate ID / Ref</span>
-                      <span className="text-xs font-bold text-cyan-400">{selectedCert.certId}</span>
+                    <div className="space-y-1">
+                      <p className="text-xs text-slate-400">This certificate is awarded to</p>
+                      <h2 className="text-2xl font-black tracking-tight font-sans text-cyan-300">
+                        ANVITH KUMAR
+                      </h2>
+                      {selectedCert.institution && (
+                        <p className="text-xs text-slate-400 font-mono pt-0.5">from {selectedCert.institution}</p>
+                      )}
                     </div>
-                  )}
-                </div>
+
+                    <div className="py-2 border-y border-slate-800/80 space-y-1">
+                      <p className="text-xs text-slate-400">for successfully completing the course</p>
+                      <h4 className="text-lg font-bold text-slate-100">{selectedCert.title}</h4>
+                      <p className="text-xs text-slate-400 font-mono">Issued: {selectedCert.issueDate}</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left pt-1">
+                      <div className="p-3 rounded-xl bg-slate-900 border border-slate-800/90 space-y-1">
+                        <span className="text-[10px] text-slate-400 font-mono uppercase block">Issuing Authority</span>
+                        <span className="text-xs font-bold text-slate-200 block">{selectedCert.issuer}</span>
+                      </div>
+
+                      <div className="p-3 rounded-xl bg-slate-900 border border-slate-800/90 space-y-1">
+                        <span className="text-[10px] text-slate-400 font-mono uppercase block">Credential Status</span>
+                        <span className="text-xs font-bold text-emerald-400 flex items-center gap-1">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                          {selectedCert.status} Verified
+                        </span>
+                      </div>
+
+                      {selectedCert.certId && (
+                        <div className="p-3 rounded-xl bg-slate-900 border border-slate-800/90 space-y-1 sm:col-span-2 font-mono">
+                          <span className="text-[10px] text-slate-400 uppercase block">Certificate ID / Ref</span>
+                          <span className="text-xs font-bold text-cyan-400">{selectedCert.certId}</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Skills & Competencies Verified */}
