@@ -296,15 +296,16 @@ const CERTIFICATIONS_DATA: Certification[] = [
   },
   {
     id: "sap-course-certificate",
-    title: "SAP Course Completion Certificate",
-    issuer: "SAP",
+    title: "SAP Code Unnati Program Certification",
+    issuer: "SAP & Edunet Foundation",
     organization: "SAP",
     status: "Completed",
-    issueDate: "March 2026",
+    issueDate: "2025 – 2026",
+    certId: "CU26_41081",
     verifyUrl: "/certificate.pdf",
-    verifyText: "Open certificate PDF",
-    description: "Completed the SAP-related coursework and training record, covering enterprise systems concepts and applied business workflow understanding.",
-    skills: ["SAP Fundamentals", "Enterprise Systems", "Business Processes", "Workflow Learning"],
+    verifyText: "Open Certificate PDF",
+    description: "Successfully completed the Code Unnati Foundation Course (a CSR initiative of SAP, implemented by Edunet Foundation), covering Python, Object-Oriented Programming, Data Analytics, DBMS, Data Structures & Algorithms, and Competitive Coding.",
+    skills: ["Python", "OOP", "Data Analytics", "DBMS", "DSA", "Competitive Coding"],
     category: "software",
     certFile: "/certificate.pdf"
   }
