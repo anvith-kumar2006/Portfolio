@@ -1688,14 +1688,23 @@ selection_status ENUM('Unselected','Selected')`}
       {/* ================= RESUME VIEWER MODAL ================= */}
       {isResumeModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-in fade-in">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden shadow-2xl">
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-3xl h-[90vh] flex flex-col overflow-hidden shadow-2xl">
             
-            <div className="p-4 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+            <div className="p-4 bg-slate-950 border-b border-slate-800 flex items-center justify-between shrink-0">
               <div className="flex items-center gap-2">
                 <FileText className="w-5 h-5 text-cyan-400" />
                 <h3 className="font-bold text-slate-100 text-sm">Anvith Kumar - Resume Overview</h3>
               </div>
               <div className="flex items-center gap-2">
+                <a
+                  href="/resume.jpeg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-1.5 rounded-lg bg-slate-800 text-cyan-400 hover:text-white font-medium text-xs flex items-center gap-1.5 border border-slate-700 hover:bg-slate-700 transition-colors"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  <span>Open Full Screen</span>
+                </a>
                 <a
                   href="/resume.jpeg"
                   download="Anvith_Kumar_Resume.jpeg"
@@ -1713,11 +1722,11 @@ selection_status ENUM('Unselected','Selected')`}
               </div>
             </div>
 
-            <div className="p-4 overflow-y-auto bg-slate-950 flex justify-center">
+            <div className="p-4 overflow-y-auto bg-slate-950 flex-1 min-h-0 flex justify-center items-start">
               <img
                 src={PROFILE_DATA.resumeImage}
                 alt="Anvith Kumar Resume"
-                className="max-w-full h-auto rounded-lg shadow-xl border border-slate-800"
+                className="w-auto max-w-full h-auto object-contain rounded-lg shadow-xl border border-slate-800"
               />
             </div>
           </div>
