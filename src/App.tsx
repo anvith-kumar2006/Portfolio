@@ -117,79 +117,140 @@ const PROFILE_DATA = {
 
 const PROJECTS_DATA: Project[] = [
   {
-    id: "verilaw",
-    title: "VeriLaw",
-    subtitle: "AI Legal Assistant for Indian Law",
+    id: "scryptic-recall",
+    title: "SCRYPTIC Recall",
+    subtitle: "Multimodal Screenshot AI Search & Personal Knowledge Base",
     category: "ai",
     featured: true,
-    description: "An intelligent digital assistant designed to democratize legal comprehension by analyzing statutes and regulations.",
-    detailedDescription: "Processes Indian legal codes to provide simplified, context-aware advice for legal professionals and everyday citizens. Combines AI integration with an intuitive web UI to turn complex statutory legalese into plain, actionable language.",
-    techStack: ["Python", "AI Integrations", "HTML5", "CSS3", "Flask"],
+    description: "A personal screenshot library with hybrid AI search, combining OCR text extraction and Gemini vector embeddings for natural-language retrieval.",
+    detailedDescription: "Processes uploaded images through Tesseract OCR and Google Gemini to extract text, generate context captions, create 768-dimensional vector embeddings, and store records in MySQL. A hybrid search engine combines cosine vector similarity with metadata filtering and term matching to produce ranked results with match explanations.",
+    techStack: ["Python", "Flask", "Google Gemini API", "Tesseract OCR", "MySQL", "NumPy", "Pillow"],
     highlights: [
-      "Natural language statute analysis & legal query processing",
-      "Contextual summarization of Indian Law & regulations",
-      "Designed for both legal practitioners and everyday citizens",
-      "Clean, accessible responsive user interface"
+      "Hybrid search combining Gemini vector similarity & OCR term matching with ranked results",
+      "Automatic text extraction via Tesseract OCR & AI-generated context captions",
+      "768-dimensional Gemini embedding storage & cosine similarity scoring in MySQL",
+      "Interactive screenshot explorer: list/grid views, pan/zoom preview & batch folder import"
     ],
-    githubUrl: "https://github.com/anvith-kumar2006/VeriLaw",
-    liveUrl: "https://github.com/anvith-kumar2006/VeriLaw"
+    githubUrl: "https://github.com/anvith-kumar2006/SCRYPTIC_RECALL"
+  },
+  {
+    id: "verilaw",
+    title: "VeriLaw",
+    subtitle: "AI Legal Assistant & Citizen Complaint Router",
+    category: "ai",
+    featured: true,
+    description: "An AI legal tech platform that classifies citizen grievances using machine learning and routes complaints to the appropriate Indian government authority.",
+    detailedDescription: "Uses Scikit-Learn TF-IDF models to analyze complaint text, recommend government departments, and provide relevant legal information. Integrates Tesseract OCR to extract evidence text from uploaded files, spaCy for entity recognition, and ReportLab to generate ready-to-submit structured PDF complaints covering categories such as RTI, FIR, Consumer, and Cyber.",
+    techStack: ["Python", "Flask", "Scikit-Learn", "MySQL", "Tesseract OCR", "spaCy", "ReportLab"],
+    highlights: [
+      "TF-IDF ML classification model for automated government department recommendation",
+      "OCR evidence extraction & spaCy NER for chronological timeline generation",
+      "Structured PDF complaint generator covering RTI, FIR, Consumer & Cyber categories",
+      "Multi-role user authentication & secure complaint package download"
+    ],
+    githubUrl: "https://github.com/anvith-kumar2006/VeriLaw"
+  },
+  {
+    id: "stop-yettinahole",
+    title: "Stop Yettinahole — Save Netravathi",
+    subtitle: "Interactive Environmental Awareness & Open Research Platform",
+    category: "web",
+    featured: true,
+    description: "An immersive web platform presenting environmental evidence, timelines, and documents related to the Yettinahole Project and Netravathi River conservation.",
+    detailedDescription: "Built with Next.js App Router and TypeScript. Features a 3D canvas scrolling experience, Framer Motion and GSAP scroll animations, video-backed chronological project timelines, and bilingual (i18n) routing. Houses a searchable repository of legal and environmental research documents.",
+    techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "GSAP", "i18n"],
+    highlights: [
+      "3D canvas scrolling experience with GSAP and Framer Motion scroll animations",
+      "Next.js App Router architecture with multi-language (i18n) route support",
+      "Interactive chronological project timeline with embedded video backgrounds",
+      "Bilingual public research and legal documentation archive"
+    ],
+    githubUrl: "https://github.com/WG-NCRF/Stop-Yettinahole-"
   },
   {
     id: "trade-analysis",
     title: "Trade-Analysis-Platform",
-    subtitle: "AI-Powered Trade Analytics Engine",
+    subtitle: "Quantitative Trade Research & Decision Support Engine",
     category: "ai",
     featured: true,
-    description: "High-performance analytics web application designed to track trading activities, process transactional records, and identify key market trends.",
-    detailedDescription: "Leveraging machine learning algorithms and robust Python data pipelines, this platform processes market records to assist traders in optimizing financial portfolios and mitigating transactional risk.",
-    techStack: ["Python", "Flask", "Pandas", "MySQL", "Machine Learning"],
+    description: "A probability-based equity research platform combining statistical analysis, machine learning, and market data engineering into a single web application.",
+    detailedDescription: "Ingests historical OHLCV data via Yahoo Finance, engineers technical and statistical features using Pandas and NumPy, and fits probability distributions. Gradient boosting regression models score directional probability of price moves. Results are reviewed on interactive Plotly dashboards with walk-forward backtesting support.",
+    techStack: ["Python", "Flask", "Pandas", "NumPy", "Scikit-Learn", "MySQL", "Plotly.js"],
     highlights: [
-      "Real-time transactional data parsing & portfolio analytics",
-      "Machine learning models for pattern recognition & risk mitigation",
-      "MySQL backend for high-throughput financial record storage",
-      "Pandas-driven predictive performance metrics"
+      "Historical OHLCV data ingestion pipeline via Yahoo Finance & automated feature engineering",
+      "Probability distribution fitting, Monte Carlo simulation & confidence interval framing",
+      "Gradient boosting regression models for probability-weighted directional scoring",
+      "Interactive Plotly dashboard with backtesting, watchlists & alert system"
     ],
-    githubUrl: "https://github.com/anvith-kumar2006/Trade-Analysis-Platform",
-    liveUrl: "https://github.com/anvith-kumar2006/Trade-Analysis-Platform"
-  },
-  {
-    id: "student-performance",
-    title: "AI-Based Student Performance Analysis System",
-    subtitle: "EdTech Predictive Risk & Analytics Platform",
-    category: "edtech",
-    featured: true,
-    description: "Educational technology solution built to analyze student performance metrics and predict potential academic backlog risks.",
-    detailedDescription: "By classifying student data into 'Good', 'Warning', and 'At Risk' profiles, the application generates interactive dashboard visualizations using Chart.js to enable educators to take early, targeted interventions.",
-    techStack: ["Python", "Flask", "MySQL", "Pandas", "Chart.js"],
-    highlights: [
-      "Automated student profile classification ('Good', 'Warning', 'At Risk')",
-      "Interactive Chart.js visualizations for grade trends & attendance",
-      "Early warning alerts for potential academic backlogs",
-      "Role-tailored dashboards for educators & institution admins"
-    ],
-    githubUrl: "https://github.com/anvith-kumar2006/AI-Student-Performance-Analysis",
-    liveUrl: "https://github.com/anvith-kumar2006/AI-Student-Performance-Analysis"
+    githubUrl: "https://github.com/anvith-kumar2006/Trade-Analysis-Platform"
   },
   {
     id: "studio-management",
-    title: "Studio Management System (SMS)",
-    subtitle: "7-Step Photography Workflow Automation Platform",
+    title: "Studio Management System (FrameFlow)",
+    subtitle: "7-Stage Photography Production Workflow Platform",
     category: "web",
     featured: true,
     hasSystemSpec: true,
-    description: "A complete, role-based workflow platform connecting clients, photographers, and editors for photography studio operations.",
-    detailedDescription: "Automates the full production cycle—from secure OTP-based login to assignment booking, image selection, color grading editing, and album delivery tracking with strict RBAC access control.",
-    techStack: ["Flask", "MySQL", "HTML5", "CSS3", "JavaScript", "RBAC", "OTP Auth"],
+    description: "A role-based workflow platform connecting clients, photographers, and editors across a 7-stage photography production pipeline.",
+    detailedDescription: "Automates the complete studio production cycle across seven discrete stages: booking, cameraman assignment, raw photo upload, time-limited client photo selection, editor color grading, client approval, and final album delivery. Implements RBAC with four role-scoped portals, OTP-based authentication, and isolated per-booking directory management.",
+    techStack: ["Python", "Flask", "MySQL", "HTML5", "CSS3", "JavaScript", "RBAC", "OTP Auth"],
     highlights: [
-      "7-Step Pipeline: Booking -> Assignment -> Raw Upload -> Selection -> Editing -> Approval -> Delivery",
-      "Four Role-Based Dashboards: Customer, Cameraman, Editor, and Studio Admin",
-      "OTP-based authentication & encrypted session authorization",
-      "Isolated booking directory structure & compressed preview thumbnails"
+      "7-Stage Pipeline: Booking → Assignment → Raw Upload → Selection → Editing → Approval → Delivery",
+      "Four role-scoped portals: Customer, Cameraman, Editor, and Studio Admin",
+      "OTP-based authentication & permission-limited time-windowed photo access",
+      "Full PRD & TRD architecture specification with normalized MySQL ERD schema"
     ],
-    githubUrl: "https://github.com/anvith-kumar2006/Studio-Management-System",
-    liveUrl: "https://github.com/anvith-kumar2006/Studio-Management-System"
+    githubUrl: "https://github.com/anvith-kumar2006/FrameFlow"
   },
-  
+  {
+    id: "ai-pdf-gen",
+    title: "AI Report & PDF Generator",
+    subtitle: "Gemini-Powered PPTX-to-Document Converter & Formatter",
+    category: "ai",
+    featured: false,
+    description: "An AI document processor that parses PowerPoint presentations and generates styled executive PDF and DOCX reports using Google Gemini.",
+    detailedDescription: "Accepts `.pptx`/`.ppt` presentation uploads and an optional sample report for style reference. Extracts slide text and structure, uses Google Gemini to analyze the sample report's styling profile, generates structured report content via LLM, and compiles the result into both a Microsoft Word DOCX and a ReportLab-rendered PDF available for direct download.",
+    techStack: ["Python", "Flask", "Google Gemini API", "python-docx", "ReportLab", "pdfplumber", "python-pptx"],
+    highlights: [
+      "PowerPoint slide content and structure extraction via python-pptx",
+      "Gemini AI-driven sample report style profile analysis & content generation",
+      "Dual-format export: styled Microsoft Word DOCX and ReportLab PDF",
+      "REST API upload/generate/export pipeline with UUID-namespaced file handling"
+    ]
+  },
+  {
+    id: "student-performance",
+    title: "AI Student Performance Analysis System",
+    subtitle: "EdTech Predictive Risk & Analytics Platform",
+    category: "edtech",
+    featured: false,
+    description: "An educational analytics application that evaluates student performance across attendance, internal marks, and assignments to predict academic backlog risk.",
+    detailedDescription: "Classifies each student as 'Good', 'Warning', or 'At-Risk' based on configurable thresholds set per subject. Teachers manage classrooms, subjects, and upload marks in bulk via CSV. Students view their own dashboard with risk status and actionable study suggestions. Chart.js renders subject average and individual performance trend graphs.",
+    techStack: ["Python", "Flask", "MySQL", "Pandas", "Chart.js", "HTML5", "CSS3"],
+    highlights: [
+      "Threshold-based risk classification ('Good', 'Warning', 'At-Risk') per subject",
+      "Separate teacher and student dashboards with class join-code enrollment",
+      "Bulk CSV mark ingestion and CSV student performance report download",
+      "Chart.js subject average and per-student performance trend visualizations"
+    ],
+    githubUrl: "https://github.com/anvith-kumar2006/student_app"
+  },
+  {
+    id: "karavali-kuisine",
+    title: "Karavali Kuisine",
+    subtitle: "Restaurant Management System & Point-of-Sale Platform",
+    category: "web",
+    featured: false,
+    description: "A full-stack restaurant operations platform covering point-of-sale order management, GST invoicing, and sales reporting with role-based access.",
+    detailedDescription: "Provides separate Admin and Cashier portals. Cashiers create orders from the menu catalog and the system automatically computes GST and generates printable invoices. Admins manage product categories, menu items, and user accounts. Built-in sales reporting aggregates revenue across daily, weekly, and monthly intervals.",
+    techStack: ["Python", "Flask", "MySQL", "HTML5", "CSS3", "JavaScript"],
+    highlights: [
+      "Point-of-sale order entry with automatic GST calculation and printable invoice output",
+      "Admin portal for menu catalog, category management & staff user accounts",
+      "Role-based access: separate Cashier billing and Admin management flows",
+      "Sales analytics reports aggregated by day, week, and month"
+    ]
+  }
 ];
 
 const SKILLS_DATA: Skill[] = [
@@ -613,7 +674,7 @@ export default function App() {
           {/* Quick Metrics Bar */}
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-2xl bg-slate-900/50 border border-slate-800/80 backdrop-blur-sm">
             {[
-              { label: "Core Projects", value: "4+ Systems", sub: "AI, Web & Verilog", icon: Layers, color: "text-cyan-400" },
+              { label: "Core Projects", value: "8+ Systems", sub: "AI, Web & Embedded", icon: Layers, color: "text-cyan-400" },
               { label: "Hardware Stack", value: "Verilog HDL", sub: "Digital Logic & Embedded", icon: Cpu, color: "text-indigo-400" },
               { label: "Software Stack", value: "Python & Flask", sub: "Pandas, MySQL & AI", icon: Server, color: "text-blue-400" },
               { label: "Education Status", value: "B.E. ECE", sub: "2024–2028 (VTU)", icon: GraduationCap, color: "text-emerald-400" }
@@ -873,14 +934,14 @@ export default function App() {
               Featured Projects
             </h2>
             <p className="text-slate-400 text-sm sm:text-base">
-              From legal AI platforms and financial trading engines to photo studio workflows and hardware logic implementations.
+              From multimodal AI search and legal document generators to photography workflow automation, environmental research platforms, and restaurant POS systems.
             </p>
           </div>
 
           {/* Project Filter Tabs */}
           <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
             {[
-              { id: 'all', label: 'All Projects (5)' },
+              { id: 'all', label: `All Projects (${PROJECTS_DATA.length})` },
               { id: 'ai', label: 'AI & Analytics' },
               { id: 'web', label: 'Full-Stack Web' },
               { id: 'edtech', label: 'EdTech & Predictive' },
@@ -912,8 +973,8 @@ export default function App() {
                   {/* Category & Status Header */}
                   <div className="flex items-center justify-between">
                     <span className="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 text-[11px] font-mono font-semibold border border-cyan-500/20 uppercase">
-                      {project.category === 'ai' && 'AI & Legal NLP'}
-                      {project.category === 'web' && 'Full-Stack Workflow'}
+                      {project.category === 'ai' && 'AI & Machine Learning'}
+                      {project.category === 'web' && 'Full-Stack Web'}
                       {project.category === 'edtech' && 'EdTech Analytics'}
                       {project.category === 'hardware' && 'Verilog & Embedded'}
                     </span>
@@ -991,7 +1052,7 @@ export default function App() {
                       <span>Explore SMS Spec</span>
                       <Maximize2 className="w-3.5 h-3.5" />
                     </button>
-                  ) : (
+                  ) : project.githubUrl ? (
                     <a
                       href={project.githubUrl}
                       target="_blank"
@@ -1001,7 +1062,7 @@ export default function App() {
                       <span>Details</span>
                       <ChevronRight className="w-3.5 h-3.5" />
                     </a>
-                  )}
+                  ) : null}
                 </div>
 
               </div>
